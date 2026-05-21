@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Считать ворон</title>
+</head>
+<body>
+  <h1>Считать ворон</h1>
+
+  <form id="crowsForm">
+    <p>
+      <label>
+        Число:
+        <input type="number" id="num" required step="1" />
+      </label>
+    </p>
+    <button type="submit">Считать</button>
+  </form>
+
+  <script>
+    'use strict';
+
+    const form = document.getElementById('crowsForm');
+    const numInput = document.getElementById('num');
+
+    function getCrowWord(n) {
+      const mod10 = n % 10;
+      const mod100 = n % 100;
+
+      if (mod100 >= 11 && mod100 <= 14) {
+        return 'ворон';
+      }
+
+      switch (mod10) {
+        case 1:
+          return 'ворона';
+        case 2:
+        case 3:
+        case 4:
+          return 'вороны';
+        default:
+          return 'ворон';
+      }
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const num = Math.trunc(Number(numInput.value));
+      if (!Number.isFinite(num) || num < 0) {
+        alert('Введите целое неотрицательное число');
+        return;
+      }
+
+      alert(`На ветке сидит ${num} ${getCrowWord(num)}`);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Простые числа</title>
+</head>
+<body>
+  <h1>Простые числа</h1>
+
+  <form id="primeForm">
+    <p>
+      <label>
+        n:
+        <input type="number" id="n" required min="2" step="1" />
+      </label>
+    </p>
+    <button type="submit">Найти</button>
+  </form>
+
+  <p id="output"></p>
+
+  <script>
+    'use strict';
+
+    const form = document.getElementById('primeForm');
+    const nInput = document.getElementById('n');
+    const output = document.getElementById('output');
+
+    function isPrime(x) {
+      if (x < 2) return false;
+      for (let i = 2; i < x; i++) {
+        if (x % i === 0) return false;
+      }
+      return true;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const n = Math.trunc(Number(nInput.value));
+      const primes = [];
+
+      for (let i = 2; i <= n; i++) {
+        if (isPrime(i)) primes.push(i);
+      }
+
+      output.textContent = primes.join(' ');
+    });
+  </script>
+</body>
+</html>
