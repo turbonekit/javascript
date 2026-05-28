@@ -33,8 +33,8 @@
       }
 
       event.preventDefault();
-      if (!confirm('Вы действительно хотите перейти по ссылке?')) {
-        event.preventDefault();
+      if (confirm('Вы действительно хотите перейти по ссылке?')) {
+        window.location.href = '../index.html';
       }
     });
   </script>

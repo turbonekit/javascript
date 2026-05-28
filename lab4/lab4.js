@@ -104,10 +104,24 @@ export class Book {
     }
 }
 
+/**
+ * Проверяет, является ли объект пустым (не имеет собственных свойств, включая неперечисляемые и символьные).
+ *
+ * @param {Object} obj - Объект для проверки.
+ * @returns {boolean} Возвращает true, если у объекта нет собственных ключей, иначе false.
+ */
 export function isEmpty(obj) {
     return Reflect.ownKeys(obj).length === 0;
 }
 
+/**
+ * Добавляет методы addClass и removeClass к переданному объекту.
+ * Предполагается, что объект имеет свойство className (строка с классами через пробел).
+ * Методы поддерживают цепочку вызовов (возвращают this).
+ *
+ * @param {Object} obj - Объект, к которому нужно добавить методы. Должен иметь свойство className.
+ * @returns {Object} Тот же объект с добавленными методами.
+ */
 export function addClassMethods(obj) {
     obj.addClass = function(cls) {
         const classes = this.className ? this.className.split(' ') : [];
@@ -131,12 +145,24 @@ export function addClassMethods(obj) {
     return obj;
 }
 
+/**
+ * Возвращает колво секунд с начала дня
+ *
+ * @returns {number} Количество секунд с начала текущего дня.
+ */
 export function getSecondsToday() {
     const now = new Date();
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     return Math.floor((now - startOfDay) / 1000);
 }
 
+/**
+ * Форматирует дату в строку вида DD.MM.YY.
+ *
+ * @param {Date} date - Объект Date для форматирования.
+ * @returns {string} Строка с датой в формате DD.MM.YY
+ *
+ */
 export function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -144,6 +170,13 @@ export function formatDate(date) {
     return `${day}.${month}.${year}`;
 }
 
+/**
+ * Выполняет глубокое сравнение двух объектов путем их сериализации в JSON.
+ *
+ * @param {*} obj1 - Первый объект для сравнения.
+ * @param {*} obj2 - Второй объект для сравнения.
+ * @returns {boolean} Возвращает true, если JSON-представления объектов идентичны, иначе false.
+ */
 export function deepEqual(obj1, obj2) {
     return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
